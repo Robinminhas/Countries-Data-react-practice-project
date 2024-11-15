@@ -21,7 +21,7 @@ export default function SearchandFilter() {
         <label htmlFor="byRegion" className="text-[10px] md:text-[15px]">
           Filter by Region :{" "}
         </label>
-        
+
         <select
           name="byRegion"
           id=""
@@ -32,6 +32,7 @@ export default function SearchandFilter() {
           <option value="europe">Europe</option>
           <option value="africa">Africa</option>
           <option value="americas">Americas</option>
+          <option value="antarctic">Antarctic</option>
         </select>
 
       </div>
