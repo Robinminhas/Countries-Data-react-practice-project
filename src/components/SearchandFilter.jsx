@@ -1,7 +1,7 @@
 import React from "react";
 import { IoSearch } from "react-icons/io5";
 
-export default function SearchandFilter() {
+export default function SearchandFilter({setQuery}) {
   return (
     <section className="flex items-center justify-between w-full h-20 mt-6">
 
@@ -13,6 +13,7 @@ export default function SearchandFilter() {
           id=""
           placeholder="Search for a country..."
           className="bg-inherit md:w-[90%] md:p-2 rounded-xl"
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
       </div>
 
@@ -27,7 +28,7 @@ export default function SearchandFilter() {
           id=""
           className="bg-slate-700 border-none text-[10px] md:text-[15px]"
         >
-          <option value="all">All</option>
+          <option value="">All</option>
           <option value="asia">Asia</option>
           <option value="europe">Europe</option>
           <option value="africa">Africa</option>
