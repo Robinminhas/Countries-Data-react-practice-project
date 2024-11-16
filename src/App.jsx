@@ -2,11 +2,13 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Header from './components/Header'
 import SearchandFilter from './components/SearchandFilter'
 import Countrycart from './components/Countrycart'
+import LoadingScreen from './components/LoadingScreen'
 
 export default function App() {
   const [Countries, setCountries] = useState([])
   const [Loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
+  const [DarkMode , setDarkMode] = useState(true)
 
   const handleFetchData = async () => {
     try {
@@ -27,28 +29,30 @@ export default function App() {
 
   return (
     <Fragment>
-      <Header />
-      <SearchandFilter setQuery={setSearchQuery}/>
+      <section className = {DarkMode? 'bg-slate-800 text-white' : 'bg-white text-black'}>
+        <Header darkMode={DarkMode} setDarkmode={setDarkMode}/>
+        <SearchandFilter setQuery={setSearchQuery} Mode={DarkMode}/>
 
-      <main className='w-full flex md:justify-evenly justify-center items-center flex-wrap md:flex-row flex-col'>
-        {
-          Loading?<h1 className='font-bold text-[25px] tracking-[15px]'>Loading...</h1>
-            :Countries.map((country , index ) => {
-              return (
-                country.name.common.toLowerCase().includes(searchQuery)?
-                <Countrycart 
-                  key={index}
-                  flagimage={country.flags.svg} 
-                  Name={country.name.common} 
-                  Population={country.population} 
-                  Capital={country.capital} 
-                  Region={country.region}
-                />:''
-              )
-            })
-        }
-      </main>
-
+        <main className='w-full flex md:justify-evenly justify-center items-center flex-wrap md:flex-row flex-col'>
+          {
+            Loading? <LoadingScreen />
+              :Countries.map((country , index ) => {
+                return (
+                  country.name.common.toLowerCase().includes(searchQuery)?
+                  <Countrycart 
+                    key={index}
+                    flagimage={country.flags.svg} 
+                    Name={country.name.common} 
+                    Population={country.population} 
+                    Capital={country.capital} 
+                    Region={country.region}
+                    Mode={DarkMode}
+                  />:''
+                )
+              })
+          }
+        </main>
+      </section>
     </Fragment>
   )
 }
